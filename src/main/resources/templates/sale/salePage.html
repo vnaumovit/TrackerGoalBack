@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8"/>
+    <link th:href="@{css/styles.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+            integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+            crossorigin="anonymous"></script>
+    <title>Продажи</title>
+    <meta name="theme-color" content="#7952b3">
+</head>
+<body class="bg-fon">
+<main>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
+        <div class="nav justify-content-left">
+        <span class="navbar-text" id="info">
+        </span>
+        </div>
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                    <a class="nav-link" th:href="@{'/logout'}" style="color: #a2a2a2">Выйти</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <ul class="list-group list-group-flush">
+                    <div>
+                        <a class="list-group-item" th:href="@{/users}">Пользователи</a>
+                    </div>
+                    <div>
+                        <a class="list-group-item" th:href="@{/items}">Товары</a>
+                    </div>
+                    <li>
+                        <a class="list-group-item active" id="salesTab" href="#salesTable" data-toggle="tab">Продажи</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-10">
+                <h1 className="h1 a1" id="h1a1">Информация о продажах</h1>
+                <div class="tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#salesTable" data-toggle="tab">Список продаж</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#newSale" data-toggle="tab">Новая продажа</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content border">
+                    <div th:replace="sale/sales.html"></div>
+                    <div th:replace="sale/addSale.html"></div>
+                    <div th:replace="modal/sale/modalItemSale.html"></div>
+                    <div th:replace="modal/sale/modalSale.html"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

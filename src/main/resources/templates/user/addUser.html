@@ -1,0 +1,98 @@
+<div class="tab-pane fade text-center" id="newUser">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="navbar-brand">Добавить пользователя</div>
+    </nav>
+
+    <form id="addUserForm">
+
+        <div class="form-floating mb-3">
+            <label for="username">Никнейм</label>
+            <input class="form-control username" name="username" id="username" required>
+            <div class="invalid-feedback" id="invalidUsername">Введите никнейм</div>
+            <div class="valid-feedback">Все хорошо!</div>
+        </div>
+
+        <div class="form-floating mb-3">
+            <label for="name">Имя</label>
+            <input class="form-control name" id="name" name="name" required>
+            <div class="invalid-feedback" id="invalidName">Введите имя</div>
+            <div class="valid-feedback">Все хорошо!</div>
+        </div>
+
+        <div class="form-floating mb-3">
+            <label for="surname">Фамилия</label>
+            <input class="form-control lastName" id="surname" name="lastName" required>
+            <div class="invalid-feedback" id="invalidSurname">Пожалуйста, введите фамилию</div>
+            <div class="valid-feedback">Все хорошо!</div>
+        </div>
+
+        <div class="form-floating mb-3">
+            <label for="password">Пароль</label>
+            <input type="password" class="form-control password" id="password" name="password" required minlength="4"
+                   maxlength="50">
+            <div class="invalid-feedback" id="invalidPassword">Пароль должен быть минимум 4 символа</div>
+            <div class="valid-feedback">Все хорошо!</div>
+        </div>
+
+        <div class="form-floating mb-2">
+            <label for="phone">Номер телефона</label>
+            <input type="tel" class="form-control phone" id="phone" name="phoneNumber" required minlength="11"
+                   maxlength="12">
+            <div class="invalid-feedback" id="invalidPhone">Длина телефона должна быть от 11 до 12</div>
+            <div class="valid-feedback">Все хорошо!</div>
+        </div>
+
+        <div class="form-floating mb-2">
+            <label for="gender" class="label-select">Пол</label>
+            <select id="gender" class="form-control select" size="2" required>
+                <option value="Male">Мужской</option>
+                <option value="Female">Женский</option>
+                <option value="Unknown">Другой</option>
+            </select>
+            <div class="invalid-feedback" id="invalidGender">Выберите пол</div>
+            <div class="valid-feedback">Все хорошо!</div>
+        </div>
+
+        <div class="form-floating mb-2">
+            <label for="age">Возраст</label>
+            <input type="number" class="form-control age" id="age" name="age" required min="14" max="120">
+            <div class="invalid-feedback" id="invalidAge">Возраст должен быть от 14 до 120</div>
+            <div class="valid-feedback">Все хорошо!</div>
+        </div>
+
+        <div class="form-group">
+            <label for="roles" class="label-select">Роль</label>
+            <select multiple id="roles" class="form-control select" size="2" required>
+                <option value="ROLE_USER">USER</option>
+                <option value="ROLE_ADMIN">ADMIN</option>
+            </select>
+            <div class="invalid-feedback" id="invalidRoles">Выберите роли</div>
+            <div class="valid-feedback">Все хорошо!</div>
+        </div>
+    </form>
+    <div class="divButton">
+        <button class="btn btn-success" id="addUser" type="submit">Добавить пользователя</button>
+    </div>
+
+    <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog" aria-labelledby="someDefaultModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                </div>
+
+                <div class="modal-footer">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

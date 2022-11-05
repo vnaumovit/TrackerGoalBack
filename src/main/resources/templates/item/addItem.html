@@ -1,0 +1,76 @@
+<div class="tab-pane fade text-center" id="newItem">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="navbar-brand">Добавить товар</div>
+    </nav>
+
+    <form id="addItemForm" class="needs-validation" novalidate>
+
+        <div class="form-group">
+            <label for="name" class="col-form-label">Название</label>
+            <input type="text" class="form-control name" id="name" required>
+            <div class="invalid-feedback" id="invalidName">Введите имя товара</div>
+            <div class="valid-feedback">Все хорошо!</div>
+        </div>
+
+        <div class="form-group">
+            <label for="itemType" class="label-select">Тип товара</label>
+            <select class="form-control" id="itemType" required>
+                <option selected value="Кольцо">Кольцо</option>
+                <option value="Браслет">Браслет</option>
+                <option value="Колье">Колье</option>
+                <option value="Серьга">Серьга</option>
+                <option value="Шарм">Шарм</option>
+            </select>
+            <div class="invalid-feedback" id="invalidItemType">Выберите тип объекта</div>
+            <div class="valid-feedback">Все хорошо!</div>
+        </div>
+
+        <div class="form-group">
+            <label for="retailPrice" class="com-form-label">Продажная цена</label>
+            <input type="number" class="form-control" id="retailPrice" min="0" required>
+            <div class="invalid-feedback" id="invalidRetailPrice">Цена не может быть меньше 0</div>
+            <div class="valid-feedback">Все хорошо!</div>
+        </div>
+
+        <div id="imgForBase64" hidden></div>
+        <div class="form-group">
+            <button type="button" class="btn btn-info form-control" id="addSize" data-toggle="modal" data-action="addSize"
+                    onclick="showSizeModal(this)">Добавить размеры
+            </button>
+            <div class="invalid-feedback" id="invalidItemQuantity">Добавьте размеры</div>
+            <div class="valid-feedback">Все хорошо!</div>
+        </div>
+
+        <div class="form-group marginTop">
+            <label>Фото:</label>
+            <input type="file" class="form-control" id="image" required>
+            <div class="invalid-feedback" id="invalidImage">Выберите изображение</div>
+            <div class="valid-feedback">Все хорошо!</div>
+        </div>
+    </form>
+    <div class="divButton">
+        <button class="btn btn-success" id="addItem" type="submit">Добавить товар</button>
+    </div>
+
+    <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog" aria-labelledby="someDefaultModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                </div>
+
+                <div class="modal-footer">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
