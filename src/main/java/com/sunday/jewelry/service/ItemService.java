@@ -2,12 +2,21 @@ package com.sunday.jewelry.service;
 
 import com.sunday.jewelry.exception.ItemException;
 import com.sunday.jewelry.model.Item;
-import com.sunday.jewelry.repository.ImageRepository;
+import com.sunday.jewelry.model.dto.Filter;
+import com.sunday.jewelry.model.dto.PageDto;
+import com.sunday.jewelry.model.enums.ItemType;
 import com.sunday.jewelry.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +26,6 @@ public class ItemService {
 
     public static final String ITEM_NOT_FOUND = "Item с %s id не найден";
     private final ItemRepository itemRepository;
-    private final ImageRepository imageRepository;
 
     public List<Item> getItems(Pageable pageable) {
         return itemRepository.findAllWithPageable(pageable);
@@ -28,7 +36,6 @@ public class ItemService {
                 () -> new ItemException(String.format(ITEM_NOT_FOUND, id))
         );
     }
-
 
     public Item save(Item item) {
         return itemRepository.save(item);

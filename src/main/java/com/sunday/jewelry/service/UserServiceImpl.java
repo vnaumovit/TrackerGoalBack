@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
     @SneakyThrows
     public User registration(UserDto userDto) {
         User user = userMapper.toEntity(userDto);
-        long ROLE_ID = 2L;
+        long ROLE_ID = 1L;
         String roleNotFoundException = String.format("Роль с %s id не найдена", ROLE_ID);
         Role role = roleRepository
                 .findById(ROLE_ID)
