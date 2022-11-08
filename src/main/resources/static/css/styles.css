@@ -40,6 +40,11 @@ body {
     margin-left: auto;
 }
 
+.search {
+    max-width: 400px;
+    margin-left: 70px;
+}
+
 #addItem {
     font-weight: bold;
 }
@@ -73,4 +78,45 @@ body {
 
 .label-select {
     vertical-align: top;
+}
+
+#filterSearch {
+    background: #19b9ab;
+    color: whitesmoke;
+}
+
+#filterReset {
+    background: #fa6c6c;
+    margin-top: 5px;
+    max-height: 70px;
+    font-size: 15px;
+    width: 170px;
+    color: whitesmoke;
+}
+
+#filterApply {
+    margin-top: 35px;
+    max-height: 70px;
+    font-size: 15px;
+    width: 170px;
+}
+
+#btn-on {
+    margin-top: 5px;
+}
+
+
+#btn-off {
+    margin-top: 5px;
+}
+
+.form-check-input {
+    height: 20px;
+    width: 70px;
+}
+
+.form-check-label {
+    height: 20px;
+    width: 70px;
+    margin-left: 30px;
 }

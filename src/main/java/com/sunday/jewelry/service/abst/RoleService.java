@@ -1,4 +1,4 @@
-package com.sunday.jewelry.service;
+package com.sunday.jewelry.service.abst;
 
 import com.sunday.jewelry.model.security.Role;
 

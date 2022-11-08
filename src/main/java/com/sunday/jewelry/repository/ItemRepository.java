@@ -5,7 +5,6 @@ import com.sunday.jewelry.model.enums.ItemType;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
@@ -15,28 +14,39 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
+@Transactional
 public interface ItemRepository extends JpaRepository<Item, UUID> {
 
-    @Transactional
     @Query("SELECT i FROM Item i " +
-           " ORDER BY i.code" +
-           "")
+           " ORDER BY i.code ")
     List<Item> findAllWithPageable(Pageable pageable);
 
-    @Transactional
     @Query("SELECT i FROM Item i " +
-           "WHERE i.itemType = :itemType AND " +
-           "i.retailPrice >= :priceFrom AND " +
-           "i.retailPrice <= :priceTo " +
-           "ORDER BY i.code")
-    List<Item> findAllByFilter(
+           "WHERE LOWER(i.name) LIKE %:name% ")
+    List<Item> findItemsLikeName(String name, Pageable pageable);
+
+    @Query("SELECT DISTINCT i FROM Item i " +
+           "JOIN Size s ON i.id = s.item.id " +
+           "WHERE (:itemType IS NULL OR i.itemType = :itemType) " +
+           "AND i.isInStock = TRUE " +
+           "AND s.size IN (:sizes) " +
+           "ORDER BY i.code ")
+    List<Item> findAllFilterWithSizes(
             ItemType itemType,
-//            Boolean isInStock,
-            Long priceFrom,
-            Long priceTo,
-//            List<Integer> sizes,
+            List<Float> sizes,
             Pageable pageable
     );
+
+    @Query("SELECT DISTINCT i FROM Item i " +
+           "WHERE (:itemType IS NULL OR i.itemType = :itemType) " +
+           "AND i.isInStock = COALESCE(:isInStock, TRUE) " +
+           "ORDER BY i.code ")
+    List<Item> findAllByFilter(
+            ItemType itemType,
+            Boolean isInStock,
+            Pageable pageable
+    );
+
 
     @NonNull
     Optional<Item> findById(UUID id);

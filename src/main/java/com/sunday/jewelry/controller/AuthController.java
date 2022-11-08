@@ -2,7 +2,7 @@ package com.sunday.jewelry.controller;
 
 import com.sunday.jewelry.model.User;
 import com.sunday.jewelry.model.dto.UserDto;
-import com.sunday.jewelry.service.UserService;
+import com.sunday.jewelry.service.abst.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

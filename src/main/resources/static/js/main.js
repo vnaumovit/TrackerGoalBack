@@ -1,6 +1,3 @@
-let roleList = [{ id: 1, role: 'ROLE_USER' }, { id: 2, role: 'ROLE_ADMIN' }]
-let pagingNumber = 0;
-
 $(async function () {
   if (window.location.pathname === '/users') {
     $('#usersTable').addClass('show active');
@@ -13,6 +10,8 @@ $(async function () {
     $('#itemsTab').addClass('show active');
     $('#itemsTable').addClass('show active');
     await getItems();
+    await callSearch();
+    await callFilter();
     await createItem();
     await getNewItemForm();
     await getItemModal();

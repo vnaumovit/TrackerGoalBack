@@ -1,4 +1,4 @@
-package com.sunday.jewelry.service;
+package com.sunday.jewelry.service.impl;
 
 import com.sunday.jewelry.exception.UserNotFoundException;
 import com.sunday.jewelry.mapper.UserMapper;
@@ -7,6 +7,7 @@ import com.sunday.jewelry.model.User;
 import com.sunday.jewelry.model.dto.UserDto;
 import com.sunday.jewelry.repository.RoleRepository;
 import com.sunday.jewelry.repository.UserRepository;
+import com.sunday.jewelry.service.abst.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -60,6 +61,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user) {
         return userRepository.save(passwordCoder(user));
+    }
+
+    @Override
+    public User update(User user) {
+        return userRepository.save(user);
     }
 
     @Override

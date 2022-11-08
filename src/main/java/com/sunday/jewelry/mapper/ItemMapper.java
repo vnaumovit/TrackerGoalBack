@@ -30,7 +30,8 @@ public class ItemMapper {
                 itemDto.getItemType(),
                 itemDto.getRetailPrice(),
                 imageMapper.toEntity(itemDto.getImage()),
-                itemDto.getSizes() != null ? sizeMapper.toEntities(itemDto.getSizes()) : null
+                itemDto.getSizes() != null ? sizeMapper.toEntities(itemDto.getSizes()) : null,
+                itemDto.getIsInStock()
         );
     }
 
@@ -42,7 +43,8 @@ public class ItemMapper {
                 item.getItemType(),
                 item.getRetailPrice(),
                 imageMapper.toDto(item.getImage()),
-                item.getSizes() != null ? sizeMapper.toDtos(item.getSizes()) : null
+                item.getSizes() != null ? sizeMapper.toDtos(item.getSizes()) : null,
+                item.getIsInStock()
         );
     }
 
@@ -56,7 +58,8 @@ public class ItemMapper {
                         i.getItemType(),
                         i.getRetailPrice(),
                         imageMapper.toDto(i.getImage()),
-                        i.getSizes() != null ? sizeMapper.toDtos(i.getSizes()) : null
+                        i.getSizes() != null ? sizeMapper.toDtos(i.getSizes()) : null,
+                        i.getIsInStock()
                 )).collect(Collectors.toList());
     }
 }

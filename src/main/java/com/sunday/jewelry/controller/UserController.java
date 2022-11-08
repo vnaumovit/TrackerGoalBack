@@ -6,7 +6,7 @@ import com.sunday.jewelry.exception.UserUsernameExistException;
 import com.sunday.jewelry.mapper.UserMapper;
 import com.sunday.jewelry.model.User;
 import com.sunday.jewelry.model.dto.UserDto;
-import com.sunday.jewelry.service.UserService;
+import com.sunday.jewelry.service.abst.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -87,8 +87,8 @@ public class UserController {
             User user = userMapper.toEntity(userDto);
             if (oldPassword.equals(userDto.getPassword())) {
                 System.out.println("TRUE");
-                userDto.setPassword(oldPassword);
-                userService.save(user);
+                user.setPassword(oldPassword);
+                userService.update(user);
             } else {
                 System.out.println("FALSE");
                 userService.save(user);

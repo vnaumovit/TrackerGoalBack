@@ -1,7 +1,8 @@
-package com.sunday.jewelry.service;
+package com.sunday.jewelry.service.impl;
 
 import com.sunday.jewelry.repository.RoleRepository;
 import com.sunday.jewelry.model.security.Role;
+import com.sunday.jewelry.service.abst.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class RoleServiceImpl implements RoleService{
+public class RoleServiceImpl implements RoleService {
 
     private RoleRepository roleRepository;
 

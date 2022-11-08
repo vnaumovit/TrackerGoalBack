@@ -1,3 +1,4 @@
+let pagingNumber = 0;
 function setPaging(number) {
   pagingNumber = number;
   getItems();

@@ -1,5 +1,5 @@
 async function deleteItem(modal, id) {
-    let request = await itemFetch.findItemById(id);
+    let request = await itemFetch.getItemById(id);
     let item = request.json();
 
     modal.find('.modal-title-item').html('Удаление товара');

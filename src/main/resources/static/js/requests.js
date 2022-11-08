@@ -5,14 +5,13 @@ const userFetch = {
     'Referer': null
   },
   findAllUsers: async () => await fetch('api/users'),
-  findUserByUsername: async () => await fetch(`api/users/current`),
   findOneUser: async (id) => await fetch(`api/users/${id}`),
   addNewUser: async (user) => await fetch('api/users', {
     method: 'POST',
     headers: userFetch.head,
     body: JSON.stringify(user)
   }),
-  updateUser: async (user, id) => await fetch(`api/users/${id}`, {
+  updateUser: async (user) => await fetch(`api/users/updateUser`, {
     method: 'PUT',
     headers: userFetch.head,
     body: JSON.stringify(user)
@@ -28,12 +27,22 @@ const itemFetch = {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
   },
-  findAllItems: async (page) => await fetch('api/items', {
+  getAllItems: async (page) => await fetch('api/items', {
     method: 'POST',
     headers: itemFetch.head,
     body: JSON.stringify(page)
   }),
-  findItemById: async (id) => await fetch(`api/items/${id}`),
+  getItemById: async (id) => await fetch(`api/items/${id}`),
+  getItemsLikeName: async (name, page) => await fetch(`api/items/search?name=${name}`, {
+    method: 'POST',
+    headers: itemFetch.head,
+    body: JSON.stringify(page)
+  }),
+  getItemsByFilter: async (filter) => await fetch(`api/items/getByFilter`, {
+    method: 'POST',
+    headers: itemFetch.head,
+    body: JSON.stringify(filter)
+  }),
   addItem: async (item) => await fetch('api/items/addItem', {
     method: 'POST',
     headers: itemFetch.head,
@@ -60,7 +69,7 @@ const sizeFetch = {
     method: 'PUT',
     headers: itemFetch.head,
     body: JSON.stringify(sizes)
-  }),
+  })
 }
 
 const imageFetch = {
@@ -73,7 +82,7 @@ const imageFetch = {
     method: 'PUT',
     headers: itemFetch.head,
     body: JSON.stringify(image)
-  }),
+  })
 }
 
 const saleFetch = {

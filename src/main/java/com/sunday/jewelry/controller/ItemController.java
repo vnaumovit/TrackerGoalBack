@@ -1,17 +1,11 @@
 package com.sunday.jewelry.controller;
 
 
-import com.sunday.jewelry.mapper.ItemMapper;
-import com.sunday.jewelry.model.Image;
-import com.sunday.jewelry.model.Item;
-import com.sunday.jewelry.model.Size;
+import com.sunday.jewelry.model.dto.Filter;
 import com.sunday.jewelry.model.dto.ItemDto;
 import com.sunday.jewelry.model.dto.PageDto;
-import com.sunday.jewelry.repository.ImageRepository;
-import com.sunday.jewelry.repository.SizeRepository;
-import com.sunday.jewelry.service.ItemService;
+import com.sunday.jewelry.service.impl.ItemServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -22,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
@@ -35,24 +30,30 @@ import java.util.UUID;
 @Validated
 public class ItemController {
 
-    private final ItemService itemService;
-    private final SizeRepository sizeRepository;
-    private final ImageRepository imageRepository;
-    private final ItemMapper itemMapper;
+    private final ItemServiceImpl itemService;
 
     @PostMapping()
     public ResponseEntity<List<ItemDto>> getAllItemsWithPageable(@RequestBody() PageDto pageDto) {
-        PageRequest paging = PageRequest.of(pageDto.getPageNumber(), pageDto.getPageSize());
-        List<Item> items = itemService.getItems(paging);
-        List<ItemDto> itemDtos = itemMapper.toDtos(items);
-        return new ResponseEntity<>(itemDtos, HttpStatus.OK);
+        List<ItemDto> items = itemService.getItems(pageDto);
+        return new ResponseEntity<>(items, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ItemDto> getItemById(@PathVariable("id") UUID id) {
-        Item item = itemService.getItemById(id);
-        ItemDto itemDto = itemMapper.toDto(item);
-        return new ResponseEntity<>(itemDto, HttpStatus.OK);
+        ItemDto item = itemService.getItemById(id);
+        return new ResponseEntity<>(item, HttpStatus.OK);
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<List<ItemDto>> getItemsLikeName(@RequestParam("name") String name, @RequestBody PageDto pageDto) {
+        List<ItemDto> items = itemService.getItemsLikeName(name, pageDto);
+        return new ResponseEntity<>(items, HttpStatus.OK);
+    }
+
+    @PostMapping("/getByFilter")
+    public ResponseEntity<List<ItemDto>> getAllItemsByFilter(@RequestBody Filter filter) {
+        List<ItemDto> items = itemService.getItemsByFilter(filter);
+        return new ResponseEntity<>(items, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -63,34 +64,14 @@ public class ItemController {
 
     @PostMapping("/addItem")
     @Transactional
-    public ResponseEntity<Item> createItem(@Valid @RequestBody ItemDto itemDto) {
-        Item item = itemMapper.toEntity(itemDto);
-        item.setCode(itemService.generateCode());
-        saveOrUpdate(item);
-        itemService.save(item);
+    public ResponseEntity<ItemDto> createItem(@Valid @RequestBody ItemDto itemDto) {
+        ItemDto item = itemService.save(itemDto);
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
 
-    @Transactional
     @PutMapping("/updateItem")
     public ResponseEntity<ItemDto> itemEdit(@Valid @RequestBody ItemDto itemDto) {
-        Item item = itemMapper.toEntity(itemDto);
-        saveOrUpdate(item);
-        itemService.save(item);
-        return new ResponseEntity<>(itemDto, HttpStatus.OK);
-    }
-
-    private void saveOrUpdate(Item item) {
-        List<Size> oldSizes = sizeRepository.findByItemId(item.getId());
-        List<Size> sizes = item.getSizes();
-        oldSizes.removeAll(sizes);
-        Image image = item.getImage();
-        image.setItem(item);
-        sizes.forEach(s -> s.setItem(item));
-        sizeRepository.deleteAll(oldSizes);
-        sizeRepository.saveAll(sizes);
-        imageRepository.save(image);
-        item.setSizes(sizes);
-        item.setImage(image);
+        ItemDto item = itemService.update(itemDto);
+        return new ResponseEntity<>(item, HttpStatus.OK);
     }
 }

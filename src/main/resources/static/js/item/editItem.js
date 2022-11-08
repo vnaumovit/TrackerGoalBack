@@ -1,5 +1,5 @@
 async function editItem(modal, id) {
-  let request = await itemFetch.findItemById(id);
+  let request = await itemFetch.getItemById(id);
   let item = request.json();
   fillItemModal(modal);
   editItemForm(item, modal);
@@ -7,11 +7,8 @@ async function editItem(modal, id) {
   validation(button);
   $(button).on('click', async () => {
     const data = await itemData(modal);
-    console.log(data)
     const itemResponse = await itemFetch.updateItem(data);
-    // console.log(data.image)
-    // const imageResponse = await imageFetch.updateImage(data.image);
-    // const sizeResponse = await sizeFetch.updateSizes(sizes);
+    sizes = [];
     if (itemResponse.ok) {
       await getItems();
       modal.modal('hide');

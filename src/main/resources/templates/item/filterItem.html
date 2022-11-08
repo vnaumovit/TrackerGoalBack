@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" xmlns="http://www.w3.org/1999/html">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item col-md-2 sizeCheckbox">
+            <span class="fa-lg">Размер</span>
+            <div class="form-check mt-3">
+                <input class="form-check-input" name="checkSize" type="checkbox" id="checkSize1" value="16"/>
+                <label class="form-check-label" for="checkSize1">16</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" name="checkSize" type="checkbox" id="checkSize2" value="16.5"/>
+                <label class="form-check-label" for="checkSize2">16,5</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" name="checkSize" type="checkbox" id="checkSize3" value="17"/>
+                <label class="form-check-label" for="checkSize3">17</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" name="checkSize" type="checkbox" id="checkSize4" value="18"/>
+                <label class="form-check-label" for="checkSize4">18</label>
+            </div>
+        </li>
+        <li class="nav-item col-md-2">
+            <button id="btn-on" class="btn btn-sm btn-outline-primary">Отметить</button>
+            <button id="btn-off" class="btn btn-sm btn-outline-primary">Снять</button>
+        </li>
+
+        <li class="nav-item col-md-2">
+            <span class="fa-lg mb-5">Есть в наличии</span>
+            <div class="form-check mt-3">
+                <input class="form-check-input" name="radioStock" type="radio" id="notStock" value="true"/>
+                <label class="form-check-label" for="notStock">Да</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" name="radioStock" type="radio" id="inStock" value="false"/>
+                <label class="form-check-label" for="inStock">Нет</label>
+            </div>
+        </li>
+
+        <li class="nav-item col-md-4">
+            <label class="label-select" for="itemTypeFilter">Тип товара</label>
+            <select class="form-control" id="itemTypeFilter">
+                <option value="Все">Все</option>
+                <option value="Кольцо">Кольцо</option>
+                <option value="Браслет">Браслет</option>
+                <option value="Колье">Колье</option>
+                <option value="Серьга">Серьга</option>
+                <option value="Шарм">Шарм</option>
+            </select>
+        </li>
+        <li class="nav-item col-md-2">
+            <button class="btn btn-success" id="filterApply" type="submit">Применить фильтры</button>
+            <button class="btn btn-warning" id="filterReset">Сбросить фильтры</button>
+        </li>
+    </ul>
+    <form class="nav-item col-md-6">
+        <input class="form-control search" id="searchItems" placeholder="Поиск" aria-label="Поиск">
+    </form>
+</nav>

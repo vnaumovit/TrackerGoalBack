@@ -7,11 +7,11 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ItemType {
-    Ring("Кольцо"),
-    Necklace("Колье"),
-    Bracelet("Браслет"),
-    Earring("Серьга"),
-    Charm("Шарм");
+    Кольцо("Кольцо"),
+    Колье("Колье"),
+    Браслет("Браслет"),
+    Серьга("Серьга"),
+    Шарм("Шарм");
 
     @JsonValue
     final String value;

@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -38,6 +40,7 @@ public class Item {
 
     private String code;
 
+    @Enumerated(EnumType.STRING)
     private ItemType itemType;
 
     private Long retailPrice;
@@ -48,4 +51,6 @@ public class Item {
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = REMOVE, mappedBy = "item")
     private List<Size> sizes;
+
+    private Boolean isInStock;
 }

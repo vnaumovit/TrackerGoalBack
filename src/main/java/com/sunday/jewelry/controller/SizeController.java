@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +25,7 @@ public class SizeController {
     private final SizeRepository sizeRepository;
 
     @GetMapping("/getByItemId/{itemId}")
+    @Transactional
     public ResponseEntity<List<SizeDto>> getSizesByItemId(@PathVariable UUID itemId) {
         List<Size> sizes = sizeRepository.findByItemId(itemId);
         List<SizeDto> sizeDtos = sizeMapper.toDtos(sizes);
