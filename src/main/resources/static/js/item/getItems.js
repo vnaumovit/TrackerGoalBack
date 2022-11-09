@@ -15,12 +15,16 @@ async function itemsForeach(items) {
   let temp = '';
   let sizeTemp = '';
   items.forEach(item => {
-    item.sizes.forEach(s => {
+    if (!item.isInStock) {
+      sizeTemp = 'Отсутствуют'
+    } else {
+    item.sizes.sort(sizes.size).forEach(s => {
       sizeTemp += `
             <span>Размер ${s.size}: ${s.quantity}</span>
             <br>
             `
     })
+    }
     temp += `
                 <tr>
                     <td><img src="data:image/png;base64,${item.image.picture}" height="100" width="125"></td>

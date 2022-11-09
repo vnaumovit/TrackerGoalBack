@@ -20,6 +20,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
 
+import static java.util.Objects.nonNull;
+
 @Service
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
@@ -98,7 +100,7 @@ public class ItemServiceImpl implements ItemService {
 
     public String generateCode() {
         String code = itemRepository.getLastCode().orElse(null);
-        if (code != null) {
+        if (nonNull(code)) {
             int num = Integer.parseInt(code.substring(3)) + 1;
             if (num < 10) {
                 code = "000" + num + "00";

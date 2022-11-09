@@ -9,6 +9,7 @@ async function addSize(modal) {
   let button = '#sizeSubmit';
   validation(button);
   $(button).on('click', async () => {
+    let count = $('#sizeCount').val();
     sizes = await sizesData(modal, null, count);
     modal.modal('hide');
   })

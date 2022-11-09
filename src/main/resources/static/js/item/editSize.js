@@ -17,17 +17,18 @@ async function editSize(modal, itemId) {
 
 async function editSizeForm(sizes, modal, count) {
   let sizesForm = ''
+  let currentCount = count;
   await sizes.then(sizes => {
-     sizes.forEach(s => {
-      count++;
-      let size = `size${count}`
-      let quantity = `quantity${count}`
+    sizes.forEach(s => {
+      currentCount++;
+      let size = `size${currentCount}`
+      let quantity = `quantity${currentCount}`
       sizesForm += `
-        <div class="form-floating mb-3" id="sizeForm${count}">
-            <input hidden id="id${count}" value="${s.id}">
-            <label class="col-form-label">Размер ${count}</label>
+        <div class="form-floating mb-3" id="sizeForm${currentCount}">
+            <input hidden id="id${currentCount}" value="${s.id}">
+            <label class="col-form-label">Размер ${currentCount}</label>
             <input class="form-control" id="${size}" required min="0" value="${s.size}">
-            <label class="col-form-label">Количество ${count}</label>
+            <label class="col-form-label">Количество ${currentCount}</label>
             <input class="form-control" id="${quantity}" required min="0" value="${s.quantity}">
             <div class="invalid-feedback">Добавьте размеры</div>
             <div class="valid-feedback">Все хорошо!</div>
@@ -36,5 +37,6 @@ async function editSizeForm(sizes, modal, count) {
     let form = document.querySelector('#addSizeForm');
     modal.find(form).append(sizesForm);
   })
+  $('#sizeCount').val(currentCount)
   return count;
 }

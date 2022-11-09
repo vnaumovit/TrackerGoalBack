@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.Objects.nonNull;
+
 @Component
 @RequiredArgsConstructor
 public class ItemMapper {
@@ -30,7 +32,7 @@ public class ItemMapper {
                 itemDto.getItemType(),
                 itemDto.getRetailPrice(),
                 imageMapper.toEntity(itemDto.getImage()),
-                itemDto.getSizes() != null ? sizeMapper.toEntities(itemDto.getSizes()) : null,
+                nonNull(itemDto.getSizes()) ? sizeMapper.toEntities(itemDto.getSizes()) : null,
                 itemDto.getIsInStock()
         );
     }
@@ -43,7 +45,7 @@ public class ItemMapper {
                 item.getItemType(),
                 item.getRetailPrice(),
                 imageMapper.toDto(item.getImage()),
-                item.getSizes() != null ? sizeMapper.toDtos(item.getSizes()) : null,
+                nonNull(item.getSizes()) ? sizeMapper.toDtos(item.getSizes()) : null,
                 item.getIsInStock()
         );
     }
@@ -58,7 +60,7 @@ public class ItemMapper {
                         i.getItemType(),
                         i.getRetailPrice(),
                         imageMapper.toDto(i.getImage()),
-                        i.getSizes() != null ? sizeMapper.toDtos(i.getSizes()) : null,
+                        nonNull(i.getSizes()) ? sizeMapper.toDtos(i.getSizes()) : null,
                         i.getIsInStock()
                 )).collect(Collectors.toList());
     }

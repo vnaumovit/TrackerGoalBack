@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import static java.util.Objects.nonNull;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -80,7 +82,7 @@ public class UserServiceImpl implements UserService {
 
     public User findByUsernameAndPassword(String username, String password) {
         User user = findByUsername(username).orElseThrow(() -> new UserNotFoundException("User not found"));
-        if (user != null) {
+        if (nonNull(user)) {
             if (passwordEncoder.matches(password, user.getPassword())) {
                 return user;
             }

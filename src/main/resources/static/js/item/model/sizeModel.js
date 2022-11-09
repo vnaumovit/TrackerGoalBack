@@ -70,5 +70,6 @@ async function addSizeForm(modal, count) {
     let form = document.querySelector('#addSizeForm');
     modal.find(form).append(bodyForm);
   }
+  $("#sizeCount").val(currCount)
   return currCount;
 }
