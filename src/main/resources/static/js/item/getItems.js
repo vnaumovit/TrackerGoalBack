@@ -18,7 +18,7 @@ async function itemsForeach(items) {
     if (!item.isInStock) {
       sizeTemp = 'Отсутствуют'
     } else {
-    item.sizes.sort(sizes.size).forEach(s => {
+    item.sizes.forEach(s => {
       sizeTemp += `
             <span>Размер ${s.size}: ${s.quantity}</span>
             <br>
@@ -33,7 +33,7 @@ async function itemsForeach(items) {
                     <td>${item.name}</td>
                     <td>${item.itemType}</td>
                     <td>${item.retailPrice}</td>
-                    <td>${sizeTemp}</td>
+                    <td style="width: 150px">${sizeTemp}</td>
                     <td class="editBtn ">
                         <button type="button" data-id="${item.id}" data-action="editItem" class="btn btn-info"
                             className data-toggle="modal" data-target="#editItemModal">Изменить</button>

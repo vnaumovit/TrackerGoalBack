@@ -1,16 +1,25 @@
 let sizes = [];
-
 async function addSize(modal) {
-  let count = 0;
   fillSizeModal(modal, 'Добавление размеров');
   addSizeBaseForm(modal)
-  count = await addSizeForm(modal, count);
-  count = await addOrDeleteSize(modal, count);
+  await fillOldSizes(modal);
+  await addOrDeleteSize(modal);
   let button = '#sizeSubmit';
   validation(button);
   $(button).on('click', async () => {
-    let count = $('#sizeCount').val();
-    sizes = await sizesData(modal, null, count);
-    modal.modal('hide');
+    await fillSizes(modal, null);
   })
+  $('#closeSize').on('click', async () => {
+    await fillSizes(modal, null);
+  })
+  $('#closeSizeSecond').on('click', async () => {
+    await fillSizes(modal, null);
+  })
+  sizes = [];
+}
+
+async function fillSizes(modal, itemId) {
+  let count = $('#sizeCount').val();
+  sizes = await sizesData(modal, itemId, count);
+  modal.modal('hide');
 }

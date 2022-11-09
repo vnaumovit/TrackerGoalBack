@@ -25,6 +25,6 @@ async function handleSearchItems(e) {
 
 async function callSearch() {
   const searchItem = document.getElementById('searchItems');
-  const debouncedHandle = debounce(await handleSearchItems, 500)
+  const debouncedHandle = debounce(await handleSearchItems, 150)
   searchItem.addEventListener('input', debouncedHandle);
 }

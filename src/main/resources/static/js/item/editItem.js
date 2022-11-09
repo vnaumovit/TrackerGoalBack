@@ -8,11 +8,16 @@ async function editItem(modal, id) {
   $(button).on('click', async () => {
     const data = await itemData(modal);
     const itemResponse = await itemFetch.updateItem(data);
-    sizes = [];
     if (itemResponse.ok) {
+      sizes = [];
+      $('#sizeCount').val('')
       await getItems();
       modal.modal('hide');
     }
+  })
+  $("#edItemClose").click(() => {
+    sizes = []
+    $('#sizeCount').val('')
   })
 }
 

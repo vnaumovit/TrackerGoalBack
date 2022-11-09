@@ -8,6 +8,7 @@ import com.sunday.jewelry.model.Size;
 import com.sunday.jewelry.model.dto.Filter;
 import com.sunday.jewelry.model.dto.ItemDto;
 import com.sunday.jewelry.model.dto.PageDto;
+import com.sunday.jewelry.model.dto.SizeDto;
 import com.sunday.jewelry.repository.ImageRepository;
 import com.sunday.jewelry.repository.ItemRepository;
 import com.sunday.jewelry.repository.SizeRepository;
@@ -17,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,7 +38,13 @@ public class ItemServiceImpl implements ItemService {
     public List<ItemDto> getItems(PageDto pageDto) {
         PageRequest paging = PageRequest.of(pageDto.getPageNumber(), pageDto.getPageSize());
         List<Item> items = itemRepository.findAllWithPageable(paging);
-        return itemMapper.toDtos(items);
+        List<ItemDto> itemDtos = itemMapper.toDtos(items);
+        return itemDtos.stream().peek(i -> {
+            List<SizeDto> sizes = i.getSizes().stream()
+                                   .sorted(Comparator.comparingDouble(SizeDto::getSize))
+                                   .toList();
+            i.setSizes(sizes);
+        }).toList();
     }
 
     @Override

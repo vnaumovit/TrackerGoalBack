@@ -85,9 +85,12 @@ async function getSizeModal() {
     }
   }).on('hidden.bs.modal', (e) => {
     let thisModal = $(e.target);
+    let count = $('#sizeCount')
+    console.log(count)
     thisModal.find('.modal-title-size').html('');
     thisModal.find('.modal-body-size').html('');
     thisModal.find('.modal-footer-size').html('');
+    thisModal.find('.modal-body-size').append(count)
   })
 }
 
@@ -136,7 +139,7 @@ function fillSizeModal(modal, text) {
   let addButton = `<button class="btn btn-success" type="submit" id="sizeSubmit">Подтвердить</button>`;
   let addElseSize = `<button class="btn btn-info ml-3" type="button" id="addElseSize">Добавить еще размер</button>`;
   let deleteSizeButton = `<button class="btn btn-info ml-3" type="button" id="deleteSizeButton">Удалить размер</button>`;
-  let closeButton = `<button type="button" class="btn btn-secondary bl-5" data-dismiss="modal">Закрыть</button>`;
+  let closeButton = `<button type="button" id="closeSize" class="btn btn-secondary bl-5" data-dismiss="modal">Закрыть</button>`;
   modal.find('.modal-footer-size').append(addButton);
   modal.find('.modal-footer-size').append(addElseSize);
   modal.find('.modal-footer-size').append(deleteSizeButton);
@@ -146,7 +149,7 @@ function fillSizeModal(modal, text) {
 function fillItemModal(modal) {
   modal.find('.modal-title-item').html('Изменение товара');
   let editButton = `<button class="btn btn-success btn-left" type="submit" id="editItemButton">Изменить</button>`;
-  let closeButton = `<button type="button" class="btn btn-secondary bl-5" data-dismiss="modal">Закрыть</button>`;
+  let closeButton = `<button type="button" id="edItemClose" class="btn btn-secondary bl-5" data-dismiss="modal">Закрыть</button>`;
   modal.find('.modal-footer-item').append(editButton);
   modal.find('.modal-footer-item').append(closeButton);
 }
