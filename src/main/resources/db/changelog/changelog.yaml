@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      file: /sql/0001_create_persistent_logins_table.sql
+      relativeToChangelogFile: true

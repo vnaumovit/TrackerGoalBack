@@ -1,35 +1,34 @@
 package com.sunday.jewelry.security;
 
 
-import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 @ComponentScan("com.sunday.jewelry")
 public class SecurityConfig {
-
-    @Value("${jssesion.id}")
-    private String jssesion_id;
+    private final DataSource dataSource;
     private final CustomUserDetailsService customUserDetailsService; // сервис, с помощью которого тащим пользователя
     private final SuccessUserHandler successUserHandler; // класс, в котором описана логика перенаправления пользователей по ролям
 
     public SecurityConfig(
-            @Qualifier("customerDetailsServiceImpl") CustomUserDetailsService customUserDetailsService,
+            DataSource dataSource, @Qualifier("customerDetailsServiceImpl") CustomUserDetailsService customUserDetailsService,
             SuccessUserHandler successUserHandler
     ) {
+        this.dataSource = dataSource;
         this.customUserDetailsService = customUserDetailsService;
         this.successUserHandler = successUserHandler;
     }
@@ -41,6 +40,7 @@ public class SecurityConfig {
             .formLogin()
 //                // указываем страницу с формой логина
             .loginPage("/login")
+
             // указываем action с формы логина
             .loginProcessingUrl("/login")
             // Указываем параметры логина и пароля с формы логина
@@ -48,12 +48,10 @@ public class SecurityConfig {
             .passwordParameter("password")
             .permitAll()
             //указываем логику обработки при логине
-            .successHandler(successUserHandler).and()
-            .rememberMe().userDetailsService(customUserDetailsService)
-            .key(jssesion_id)
             // даем доступ к форме логина всем
             .and()
-            .rememberMe()
+            .rememberMe().tokenRepository(persistentTokenRepository())
+            .userDetailsService(customUserDetailsService)
             .and()
             // делаем страницу регистрации недоступной для авторизированных пользователей
             .authorizeRequests()
@@ -69,12 +67,18 @@ public class SecurityConfig {
             .permitAll()
             // указываем URL логаута
             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            .deleteCookies("JSESSIONID", "remember-me")
+            .deleteCookies("dummyCookie")
             // указываем URL при удачном логауте
             .logoutSuccessUrl("/login")
-            //выклчаем кроссдоменную секьюрность (на этапе обучения неважна)
             .and().csrf().disable();
         return http.build();
+    }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
+        db.setDataSource(dataSource);
+        return db;
     }
 
     @Bean
