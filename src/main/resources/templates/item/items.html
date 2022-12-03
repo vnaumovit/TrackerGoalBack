@@ -1,5 +1,5 @@
-<div th:replace="item/filterItem.html"></div>
 <div class="tab-pane fade" id="itemsTable">
+    <div th:replace="product/filterItem.html"></div>
     <div>
         <table class="table table-striped" id="tableAllItems">
             <thead>
@@ -20,20 +20,8 @@
     </div>
     <nav>
         <ul class="pagination justify-content-center">
-            <li class="page-item disabled" id="bt1">
-                <button class="page-link" onclick="pagingPrev()">Предыдущая</button>
-            </li>
-            <li class="page-item active" id="bt2">
-                <button class="page-link active" onclick="setPaging(0)">1</button>
-            </li>
-            <li class="page-item" id="bt3">
-                <button class="page-link" onclick="setPaging(1)">2</button>
-            </li>
-            <li class="page-item" id="bt4">
-                <button class="page-link" onclick="setPaging(2)">3</button>
-            </li>
-            <li class="page-item" id="bt5">
-                <button class="page-link" onclick="pagingNext()">Следующая</button>
+            <li class="page-product">
+                <button class="page-link" id="showElse" onclick="pagingNext(false)" value="1">Показать еще</button>
             </li>
         </ul>
     </nav>

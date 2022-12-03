@@ -1,4 +1,19 @@
 databaseChangeLog:
   - include:
-      file: /sql/0001_create_persistent_logins_table.sql
+      file: /sql/V_01_initial_table_tracker_goals.sql
+      relativeToChangelogFile: true
+  - include:
+      file: /sql/V_02_insert_roles.sql
+      relativeToChangelogFile: true
+  - include:
+      file: /sql/V_03_insert_goal_groups.sql
+      relativeToChangelogFile: true
+  - include:
+      file: /sql/V_04_add_column_goals_table.sql
+      relativeToChangelogFile: true
+  - include:
+      file: /sql/V_05_alter_table_goals.sql
+      relativeToChangelogFile: true
+  - include:
+      file: /sql/V_06_initial_habits_table.sql
       relativeToChangelogFile: true

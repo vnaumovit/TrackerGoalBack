@@ -1,18 +1,16 @@
 async function deleteItem(modal, id) {
     let request = await itemFetch.getItemById(id);
     let item = request.json();
-
-    modal.find('.modal-title-item').html('Удаление товара');
-
+    modal.find('.modal-title').html('Удаление товара');
     let deleteButton = `<button  class="btn btn-danger" id="deleteButton">Удаление</button>`;
     let closeButton = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>`
-    modal.find('.modal-footer-item').append(deleteButton);
-    modal.find('.modal-footer-item').append(closeButton);
+    modal.find('.modal-footer').append(deleteButton);
+    modal.find('.modal-footer').append(closeButton);
     itemDeleteForm(item, modal);
     $("#deleteButton").on('click', async () => {
         const response = await itemFetch.deleteItem(id);
         if (response.ok) {
-            getItems();
+            await getItems(true);
             modal.modal('hide');
         }
     })
@@ -41,6 +39,6 @@ function itemDeleteForm(item, modal) {
                 </div>
             </form>
         `;
-        modal.find('.modal-body-item').append(bodyForm);
+        modal.find('.modal-body').append(bodyForm);
     });
 }

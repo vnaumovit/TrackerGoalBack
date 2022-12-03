@@ -1,13 +1,9 @@
 async function editUser(modal, id) {
-  validation(modal)
   let request = await userFetch.findOneUser(id);
-  let user = request.json();
-  modal.find('.modal-title-user').html('Изменение пользователя');
-  let editButton = `<button  class="btn btn-info" id="editButton">Edit</button>`;
-  let closeButton = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>`
-  modal.find('.modal-footer-user').append(editButton);
-  modal.find('.modal-footer-user').append(closeButton);
+  let user = await request.json();
+  fillMainModal(modal, 'Изменение пользователя')
   userEditForm(user, modal);
+  validation(modal)
   $('#editButton').on('click', async () => {
     let data = userData(modal);
     const response = await userFetch.updateUser(data);
@@ -20,8 +16,7 @@ async function editUser(modal, id) {
 }
 
 function userEditForm(user, modal) {
-  user.then(user => {
-    let bodyForm = `
+  let bodyForm = `
             <form class="form-group text-center" id="editUser">
                <div class="form-group">
                     <label for="id" class="col-form-label">ID</label>
@@ -71,15 +66,15 @@ function userEditForm(user, modal) {
                 
                 <div class="form-group">
                     <label for="roles" class="label-select">Роли</label>
-                    <select multiple id="roles" size="2" class="form-control" style="max-height: 100px">
+                    <select multiple id="roles" size="3" class="form-control" style="max-height: 100px">
                       <option value="ROLE_USER">USER</option>
                       <option value="ROLE_ADMIN">ADMIN</option>
+                      <option value="ROLE_SUPER_ADMIN">SUPER_ADMIN</option>
                     </select>
                 </div>
             </form>
         `;
-    modal.find('.modal-body-user').append(bodyForm);
-    modal.find('#gender').val(user.gender)
-    modal.find('#roles').val(user.roles.map(r => r.name))
-  });
+  modal.find('.modal-body').append(bodyForm);
+  modal.find('#gender').val(user.gender)
+  modal.find('#roles').val(user.roles.map(r => r.name))
 }

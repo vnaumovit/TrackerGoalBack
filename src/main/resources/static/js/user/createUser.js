@@ -18,6 +18,14 @@ function clearFields(addUserForm) {
     addUserForm.find('#surname').val('');
     addUserForm.find('#age').val('');
     addUserForm.find('#gender').val('');
-    addUserForm.find(checkedRoles()).val('');
+    addUserForm.find('#roles').val('');
     addUserForm.find('#image').val('');
+}
+
+async function getNewUserForm() {
+    let button = $(`#addUser`);
+    let form = $(`#addUserForm`)
+    button.click(() => {
+        form.show()
+    })
 }

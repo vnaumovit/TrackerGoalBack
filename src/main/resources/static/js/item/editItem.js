@@ -1,23 +1,21 @@
 async function editItem(modal, id) {
   let request = await itemFetch.getItemById(id);
   let item = request.json();
-  fillItemModal(modal);
+  fillMainModal(modal, 'Изменение товара');
   editItemForm(item, modal);
-  let button = '#editItemButton';
-  validation(button);
-  $(button).on('click', async () => {
+  let btn = '#editButton';
+  validation(btn);
+  $(btn).on('click', async () => {
     const data = await itemData(modal);
     const itemResponse = await itemFetch.updateItem(data);
     if (itemResponse.ok) {
-      sizes = [];
-      $('#sizeCount').val('')
-      await getItems();
+      clearSizes();
+      await getItems(true);
       modal.modal('hide');
     }
   })
-  $("#edItemClose").click(() => {
-    sizes = []
-    $('#sizeCount').val('')
+  $('#closeButton').click(() => {
+    clearSizes()
   })
 }
 
@@ -64,20 +62,18 @@ function editItemForm(item, modal) {
                         
                 <div class="form-group">
                     <button type="button" class="btn btn-info" id="editSize" data-toggle="modal"
-                     data-item-id="${item.id}" data-action="editSize" onclick="showSizeModal(this)">Изменить размеры</button>
+                     data-id="${item.id}" data-action="editSize" onclick="shopOptionalModal(this)">Изменить размеры</button>
                     <div class="invalid-feedback" id="invalidItemQuantity">Добавьте размеры</div>
                     <div class="valid-feedback">Все хорошо!</div>
                 </div>
         
                 <div class="form-group marginTop">
                     <label for="image" >Фото:</label>
-                    <input type="file" class="form-control" id="image" name="image" required>
-                    <div class="invalid-feedback" id="invalidImage">Выберите изображение</div>
-                    <div class="valid-feedback">Все хорошо!</div>
+                    <input type="file" class="form-control" id="image" name="image">
                 </div>
             </form>
         `;
-    modal.find('.modal-body-item').append(bodyForm);
+    modal.find('.modal-body').append(bodyForm);
     modal.find('#itemType').val(item.itemType)
   });
 }

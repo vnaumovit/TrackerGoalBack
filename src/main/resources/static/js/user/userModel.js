@@ -23,7 +23,7 @@ function userData(modal) {
 
 
 function checkRoles(modal) {
-    let roleList = [{ id: 1, name: 'ROLE_USER' }, { id: 2, name: 'ROLE_ADMIN' }]
+    let roleList = [{ id: 1, name: 'ROLE_USER' }, { id: 2, name: 'ROLE_ADMIN' }, {id: 3, name: 'ROLE_SUPER_ADMIN'}]
     return () => {
         let array = []
         let selectRoles = modal.find('#roles').val()

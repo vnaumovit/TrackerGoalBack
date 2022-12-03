@@ -1,0 +1,50 @@
+<div class="tab-pane fade text-center" hidden id="newItemSale">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="navbar-brand">Добавить продажу</div>
+    </nav>
+
+    <form id="addSaleForm" class="needs-validation" novalidate>
+
+        <div class="form-group">
+            <label for="name" class="col-form-label">Имя покупателя</label>
+            <input type="text" class="form-control name" id="name" required>
+            <div class="invalid-feedback" id="invalidName">Введите имя покупателя</div>
+            <div class="valid-feedback">Все хорошо!</div>
+        </div>
+
+        <div class="form-group">
+            <label for="phone" class="col-form-label">Телефон</label>
+            <input type="text" class="form-control name" id="phone" required>
+            <div class="invalid-feedback" id="invalidPhone">Введите телефон покупателя</div>
+            <div class="valid-feedback">Все хорошо!</div>
+        </div>
+
+        <div class="form-group">
+            <label for="channelSale" class="select">Выберите канал продвижения</label>
+            <select class="form-control select" id="channelSale" required>
+                <option value="Таргет инстаграма">Таргет инстаграма</option>
+                <option value="Инстаграм">Инстаграм</option>
+                <option value="Магазин">Магазин</option>
+                <option value="Другое">Другое</option>
+            </select>
+            <div class="invalid-feedback" id="invalidChannelSale">Выберите статус</div>
+            <div class="valid-feedback">Все хорошо!</div>
+        </div>
+
+        <div class="form-group">
+            <label for="status" class="label-select">Выберите статус</label>
+            <select class="form-control select" id="status" required>
+                <option value="Новый">Новый</option>
+                <option value="Оплачен">Оплачен</option>
+                <option value="Отправлен">Отправлен</option>
+                <option value="Получен">Получен</option>
+            </select>
+            <div class="invalid-feedback" id="invalidStatus">Выберите статус</div>
+            <div class="valid-feedback">Все хорошо!</div>
+        </div>
+
+    </form>
+    <div class="divButton">
+        <button class="btn btn-success" id="addSale" type="submit">Добавить продажу</button>
+    </div>
+</div>
