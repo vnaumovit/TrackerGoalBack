@@ -1,29 +1,35 @@
-async function getItems() {
-  let page = { pageNumber: pagingNumber, pageSize: 15 };
+async function getItems(isFilter, pageNumber) {
+  if (pageNumber === undefined) {
+    pageNumber = 0
+  }
+  let pageSize = 10;
+  let page = { pageNumber: pageNumber, pageSize: pageSize };
   let items = await itemFetch.getAllItems(page)
     .then(res => res.json())
     .then(items => items);
-  await itemsForeach(items);
+  if (items.length < pageSize) {
+    $('#showElse').prop('hidden', true)
+  }
+  await itemsForeach(items, isFilter);
   $('#tableAllItems').find('button').on('click', (event) => {
-    showItemModal(event);
+    showMainModal(event);
   })
 }
 
-async function itemsForeach(items) {
+async function itemsForeach(items, isSearch) {
   const table = document.querySelector('#tableAllItems tbody');
-  table.innerHTML = '';
   let temp = '';
   let sizeTemp = '';
   items.forEach(item => {
     if (!item.isInStock) {
       sizeTemp = 'Отсутствуют'
     } else {
-    item.sizes.forEach(s => {
-      sizeTemp += `
+      item.sizes.forEach(s => {
+        sizeTemp += `
             <span>Размер ${s.size}: ${s.quantity}</span>
             <br>
             `
-    })
+      })
     }
     temp += `
                 <tr>
@@ -36,7 +42,7 @@ async function itemsForeach(items) {
                     <td style="width: 150px">${sizeTemp}</td>
                     <td class="editBtn ">
                         <button type="button" data-id="${item.id}" data-action="editItem" class="btn btn-info"
-                            className data-toggle="modal" data-target="#editItemModal">Изменить</button>
+                            className data-toggle="modal">Изменить</button>
                     </td>
                     <td class="deleteBtn">
                         <button type="button" data-id="${item.id}" data-action="deleteItem" class="btn btn-danger"
@@ -46,6 +52,10 @@ async function itemsForeach(items) {
             `
     sizeTemp = '';
   });
-  table.innerHTML = temp;
+  if (isSearch) {
+    table.innerHTML = temp
+  } else {
+    table.innerHTML += temp;
+  }
 }
 

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+            integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/registration.css">
+    <script src="/js/user/registration.js"></script>
+    <script src="/js/renderApp/main.js"></script>
+    <script src="/js/renderApp/definitionLink.js"></script>
+    <script src="/js/utils/validation.js"></script>
+    <title>Страница регистрации</title>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand">Панель регистрации</a>
+    <a class="btn btn-info login leftContainer" href="@{/login}">Войти</a>
+</nav>
+<main class="container">
+    <div class="registration">
+        <form id="registrationForm" class="needs-validation" novalidate>
+            <h1 class="h3">Пожалуйста заполните данные</h1>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="username">Никнейм</label>
+                    <input class="form-control username" name="username" id="username" required>
+                    <div class="invalid-feedback">Введите никнейм</div>
+                    <div class="valid-feedback">Все хорошо!</div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="password">Пароль</label>
+                    <input type="password" class="form-control password" id="password" name="password" required
+                           minlength="4"
+                           maxlength="50">
+                    <div class="invalid-feedback">Пароль должен быть минимум 4 символа</div>
+                    <div class="valid-feedback">Все хорошо!</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="name">Имя</label>
+                    <input class="form-control name" id="name" name="name" required>
+                    <div class="invalid-feedback">Введите имя</div>
+                    <div class="valid-feedback">Все хорошо!</div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="surname">Фамилия</label>
+                    <input class="form-control lastName" id="surname" name="lastName" required>
+                    <div class="invalid-feedback">Пожалуйста, введите фамилию</div>
+                    <div class="valid-feedback">Все хорошо!</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="phone">Номер телефона</label>
+                    <input type="tel" class="form-control phone" id="phone" name="phoneNumber" required minlength="11"
+                           maxlength="12">
+                    <div class="invalid-feedback">Длина телефона должна быть от 11 до 12</div>
+                    <div class="valid-feedback">Все хорошо!</div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="gender">Пол:</label>
+                    <select id="gender" class="form-control select" size="2" required>
+                        <option value="Male">Мужской</option>
+                        <option value="Female">Женский</option>
+                        <option value="Unknown">Другой</option>
+                    </select>
+                    <div class="invalid-feedback">Выберите пол</div>
+                    <div class="valid-feedback">Все хорошо!</div>
+                </div>
+                <div class="form-check">
+                    <div class="form-floating mb-2">
+                        <label for="age">Возраст</label>
+                        <input type="number" class="form-control age" id="age" name="age" required min="14" max="120">
+                        <div class="invalid-feedback">Возраст должен быть от 14 до 120</div>
+                        <div class="valid-feedback">Все хорошо!</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-success" id="registrationButton" type="submit">Регистрация</button>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

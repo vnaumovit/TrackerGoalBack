@@ -1,17 +1,4 @@
 
-body {
-    /*background: url("../images/back2.jpg");*/
-}
-
-.bg-fon {
-    /*background-color:rgba(0,0,0,.3);*/
-    /*height:100%;*/
-    /*position:fixed;*/
-    /*width:100%;*/
-    /*top:0;*/
-    /*left:0;*/
-}
-
 .row {
     position: absolute;
     width: 100%;
@@ -53,25 +40,16 @@ body {
     max-height: 100px;
 }
 
-.btn-left {
-
+.modal {
+    position: absolute;
 }
 
-.btn-right {
-
-}
-
-.modal-footer-item {
+.modal-footer-main {
     display: flex;
     justify-content: space-around;
 }
 
-.modal-footer-size {
-    display: flex;
-    justify-content: space-around;
-}
-
-.modal-footer-user {
+.modal-footer-optional {
     display: flex;
     justify-content: space-around;
 }
@@ -119,4 +97,14 @@ body {
     height: 20px;
     width: 70px;
     margin-left: 30px;
+}
+
+.modal-body-optional {
+    min-height: 150px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+#searchItems {
+    max-width: 710px;
 }

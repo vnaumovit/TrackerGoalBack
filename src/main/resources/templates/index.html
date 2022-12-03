@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link th:href="@{css/styles.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+            integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" th:src="@{js/renderApp/definitionLink.js}"></script>
+    <script type="text/javascript" th:src="@{js/renderApp/main.js}"></script>
+    <script type="text/javascript" th:src="@{js/product/getItems.js}"></script>
+    <script type="text/javascript" th:src="@{js/utils/modal.js}"></script>
+    <script type="text/javascript" th:src="@{js/utils/requests.js}"></script>
+    <script type="text/javascript" th:src="@{js/utils/paging.js}"></script>
+    <script type="text/javascript" th:src="@{js/product/createItem.js}"></script>
+    <script type="text/javascript" th:src="@{js/product/editItem.js}"></script>
+    <script type="text/javascript" th:src="@{js/product/deleteItem.js}"></script>
+    <script type="text/javascript" th:src="@{js/utils/imageConverter.js}"></script>
+    <script type="text/javascript" th:src="@{js/product/model/itemModel.js}"></script>
+    <script type="text/javascript" th:src="@{js/product/size/addSize.js}"></script>
+    <script type="text/javascript" th:src="@{js/product/size/editSize.js}"></script>
+    <script type="text/javascript" th:src="@{js/user/createUser.js}"></script>
+    <script type="text/javascript" th:src="@{js/user/deleteUser.js}"></script>
+    <script type="text/javascript" th:src="@{js/user/editUser.js}"></script>
+    <script type="text/javascript" th:src="@{js/user/getUsers.js}"></script>
+    <script type="text/javascript" th:src="@{js/user/userModel.js}"></script>
+    <script type="text/javascript" th:src="@{js/product/model/sizeModel.js}"></script>
+    <script type="text/javascript" th:src="@{js/utils/validation.js}"></script>
+    <script type="text/javascript" th:src="@{js/product/filter/searchItem.js}"></script>
+    <script type="text/javascript" th:src="@{js/product/filter/filterItem.js}"></script>
+    <script type="text/javascript" th:src="@{js/product/size/diferentSizesFunctions.js}"></script>
+    <script type="text/javascript" th:src="@{js/sale/sale.js}"></script>
+    <title>Users</title>
+    <meta name="theme-color" content="#7952b3">
+</head>
+<body class="bg-fon">
+<main>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
+        <div class="nav justify-content-left">
+        <span class="navbar-text" id="info">
+        </span>
+        </div>
+        <ul class="nav justify-content-end">
+            <li class="nav-product">
+                <a class="nav-link" th:href="@{'/logout'}" style="color: #a2a2a2">Выйти</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <nav class="list-group list-group-flush">
+                    <div>
+                        <a sec:authorize="hasRole('ROLE_SUPER_ADMIN')" class="list-group-product" data-link id="usersTab" data-toggle="tab">Пользователи</a>
+                    </div>
+                    <div>
+                        <a class="list-group-product active" data-link data-toggle="tab"
+                           id="itemsTab">Товары</a>
+                    </div>
+                    <div>
+                        <a class="list-group-product" data-link data-toggle="tab"
+                           id="salesTab">Продажи</a>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-10">
+                <div th:replace="product/itemPage.html"></div>
+                <div th:replace="user/userPage.html"></div>
+                <div th:replace="sale/salePage.html"></div>
+                <div th:replace="modal/modalMain.html"></div>
+                <div th:replace="modal/modalOptional.html"></div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
