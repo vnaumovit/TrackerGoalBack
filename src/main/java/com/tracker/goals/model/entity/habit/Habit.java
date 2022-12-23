@@ -1,6 +1,5 @@
 package com.tracker.goals.model.entity.habit;
 
-import com.tracker.goals.model.enums.goal.GoalStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,16 +7,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
+
+import static javax.persistence.CascadeType.REMOVE;
 
 @Entity
 @Table(name = "habits")
@@ -31,8 +30,8 @@ public class Habit {
     @GeneratedValue()
     private UUID id;
     private String name;
-    private String description;
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "habit_id")
-    private List<HabitCheckmark> habitCheckmarks;
+    private Timestamp createAt;
+
+    @OneToMany(fetch = FetchType.LAZY,  cascade = REMOVE, mappedBy = "habit")
+    private List<HabitDay> habitDays;
 }

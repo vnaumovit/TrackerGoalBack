@@ -17,6 +17,7 @@ import static java.util.Objects.nonNull;
 public class JWTTokenHelper {
 
 
+    public static final long EXTRA_TIME = 100_000_000L;
     @Value("${jwt.auth.app}")
     private String appName;
 
@@ -52,7 +53,7 @@ public class JWTTokenHelper {
     }
 
     private Date generateExpirationDate() {
-        return new Date(new Date().getTime() + expiresIn * 1000L);
+        return new Date(new Date().getTime() + expiresIn * EXTRA_TIME);
     }
 
     public Boolean validateToken(String token, CustomUserDetails userDetails) {

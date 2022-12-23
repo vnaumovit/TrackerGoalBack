@@ -17,3 +17,6 @@ databaseChangeLog:
   - include:
       file: /sql/V_06_initial_habits_table.sql
       relativeToChangelogFile: true
+  - include:
+      file: /sql/V_07_initial_tasks_table.sql
+      relativeToChangelogFile: true

@@ -5,3 +5,7 @@ spring.liquibase.change-log=classpath:db/changelog/changelog.yaml
 spring.liquibase.enabled=true
 
 spring.jpa.hibernate.ddl-auto=validate
+
+jwt.auth.app=Tracker-goals
+jwt.auth.secret_key=3}'lWvJdG&k~;UwKdvyHx>BZS>bBpR/-'TN#AxZrG*ZM2v@4WV=e-@.KeDBY~-K
+jwt.auth.expires_in=3600

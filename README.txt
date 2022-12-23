@@ -1,2 +1,2 @@
-#Приложение SHOP_CRM
-version 0.1
+# Приложение TrackerGoal
+version 0.2

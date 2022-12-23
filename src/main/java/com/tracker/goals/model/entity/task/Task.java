@@ -1,6 +1,5 @@
-package com.tracker.goals.model.dto.habit;
+package com.tracker.goals.model.entity.task;
 
-import com.tracker.goals.model.enums.habit.CheckmarkStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,15 +10,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.LocalDate;
+import java.sql.Timestamp;
 import java.util.UUID;
 
+@Entity
+@Table(name = "tasks")
 @Getter
 @AllArgsConstructor
 @Builder()
 @Setter
-public class HabitCheckmarkDto {
+@NoArgsConstructor
+public class Task {
+    @Id
+    @GeneratedValue()
     private UUID id;
-    private LocalDate date;
-    private CheckmarkStatus status;
+    private String name;
+    private Boolean isDone;
+    private Timestamp createAt;
 }
